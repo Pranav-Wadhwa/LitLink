@@ -14,9 +14,9 @@ const RootNode = ({ rootObj, showPartner, svgCenter }) => {
 
   return (
     <>
-      <svg width="3000" height="3000" xmlns="http://www.w3.org/2000/svg">
+      <svg width="1250" height="1250" xmlns="http://www.w3.org/2000/svg">
         {/* <g>{createPaths(rootNode, [svgCenter, 200], showPartner)}</g> */}
-        <g>{createPathsCircle(nodes, [svgCenter, 1500])}</g>
+        <g>{createPathsCircle(nodes, [svgCenter, 625])}</g>
       </svg>
     </>
   );

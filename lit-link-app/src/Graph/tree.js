@@ -8,7 +8,7 @@ const Tree = ({rootObj, showPartner}) => {
       <MemoizedRootNode
         rootObj={rootObj}
         showPartner={showPartner}
-        svgCenter={1000}
+        svgCenter={625}
       ></MemoizedRootNode>
     </div>
   );

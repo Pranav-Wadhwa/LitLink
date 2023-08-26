@@ -1,24 +1,23 @@
 import { React, useState } from "react";
 import { CIRCLE_RADIUS } from "./utils";
+import "./Node.css";
 
 const NodeComp = ({ node, nodePos, isPartner }) => {
   const [showDetails, setShowDetails] = useState(false);
   const showDetailsBox = () => {
-    if (showDetails) {
       return (
         <rect
           x={nodePos[0]}
           y={nodePos[1]}
-          width="150"
-          height="150"
+          width="200"
+          height="100"
           stroke="green"
           fill="white"
           strokeWidth="2"
+          className="details-box"
+          opacity={showDetails ? 1 : 0}
         />
       );
-    } else {
-      return [];
-    }
   };
   const handleMouseEnter = () => {
     setShowDetails(true);
@@ -37,7 +36,7 @@ const NodeComp = ({ node, nodePos, isPartner }) => {
       );
     } else {
       return (
-        <text x={nodePos[0]} y={nodePos[1]}>
+        <text x={nodePos[0] - (node.name.length * 4)} y={nodePos[1]} className="node-text">
           {node.name}
         </text>
       )
@@ -50,12 +49,14 @@ const NodeComp = ({ node, nodePos, isPartner }) => {
         cx={nodePos[0]}
         cy={nodePos[1]}
         r={CIRCLE_RADIUS}
-        stroke="green"
+        stroke="#282c34"
         fill="white"
-        strokeWidth="2"
+        strokeWidth="4"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-      ></circle>
+      >
+        
+      </circle>
       {displayName()  }
       {showDetailsBox()}
     </>

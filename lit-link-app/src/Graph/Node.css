@@ -1,0 +1,15 @@
+.detail-box {
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.node {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background-color: white;
+}
+
+.node-text {
+    pointer-events: none;
+}

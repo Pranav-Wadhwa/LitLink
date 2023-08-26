@@ -30,6 +30,8 @@ function App() {
 
   return (
     <div className="App">
+      <h1 className='App-header'>Romeo and Juliet</h1>
+      <h4>Play by William Shakespeare | 1597</h4>
       {isLoading && <p>Fetching data...</p>}
       {characterData && <Tree rootObj={characterData}></Tree>}
     </div>

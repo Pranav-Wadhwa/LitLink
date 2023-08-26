@@ -357,7 +357,7 @@ export const createPathsCircle = (nodes, centerPos) => {
           y1={relationship.relationNode.circlePos[1]}
           x2={node.circlePos[0]}
           y2={node.circlePos[1]}
-          stroke="black"
+          stroke="white"
           stroke-width="2"
         />
       );
