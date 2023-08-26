@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import { CIRCLE_RADIUS } from "./utils";
 import "./Node.css";
 
-const NodeComp = ({ node, nodePos, isPartner }) => {
+const NodeComp = ({ node, nodePos, isPartner, childTapped, currentDescription }) => {
   const [showDetails, setShowDetails] = useState(false);
   const showDetailsBox = () => {
       return (
@@ -19,28 +19,25 @@ const NodeComp = ({ node, nodePos, isPartner }) => {
         />
       );
   };
-  const handleMouseEnter = () => {
-    setShowDetails(true);
-  };
+  // const handleMouseEnter = () => {
+  //   setShowDetails(true);
+  // };
 
-  const handleMouseLeave = () => {
-    setShowDetails(false);
-  };
+  // const handleMouseLeave = () => {
+  //   setShowDetails(false);
+  // };
+
+  const handleClick = () => {
+    console.log(document);
+    childTapped(node.bio);
+  }
 
   const displayName = () => {
-    if (isPartner) {
-      return (
-        <text x={nodePos[0]} y={nodePos[1]}>
-          {node.name}
-        </text>
-      );
-    } else {
-      return (
-        <text x={nodePos[0] - (node.name.length * 4)} y={nodePos[1]} className="node-text">
-          {node.name}
-        </text>
-      )
-    }
+    return (
+      <text x={nodePos[0]} y={nodePos[1]} className="node-text" textAnchor="middle" dy=".35em">
+        {node.name}
+      </text>
+    )
   }
   return (
     <>
@@ -49,16 +46,18 @@ const NodeComp = ({ node, nodePos, isPartner }) => {
         cx={nodePos[0]}
         cy={nodePos[1]}
         r={CIRCLE_RADIUS}
-        stroke="#282c34"
+        stroke={currentDescription == node.bio ? "#44C4FB" : "#282c34"}
         fill="white"
         strokeWidth="4"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
+        className="node"
+        // onMouseEnter={handleMouseEnter}
+        // onMouseLeave={handleMouseLeave}
       >
         
       </circle>
       {displayName()  }
-      {showDetailsBox()}
+      {/* {showDetailsBox()} */}
     </>
   );
 };

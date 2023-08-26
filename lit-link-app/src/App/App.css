@@ -1,13 +1,40 @@
 .App {
   text-align: center;
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: scroll;
   width: 100%;
   background-color: #282c34;
   display: flex;
   flex-direction: column;
   color: white;
+  position: relative;
+  padding-bottom: 100px;
 }
 
 .App-header {
   font-size: 48px;
+  margin: 0;
+  margin-top: 32px;
+}
+
+.App-subtitle {
+  font-size: 24px;
+  font-weight: 400;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.App-descriptions {
+  width: 50%;
+  min-height: 100px;
+  background-color: rgba(255, 255, 255, 0.95);
+  /* background-color: rgba(40, 44, 52, 1);
+  box-shadow: 10px 0px 10px rgba(255, 255, 255 0.6); */
+  position: fixed;
+  left: 25%;
+  padding: 32px;
+  color: black;
+  border-radius: 32px;
+  bottom: 32px;
+  box-sizing: border-box;
 }

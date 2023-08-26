@@ -1,5 +1,6 @@
 import NodeComp from "./node";
-export const CIRCLE_RADIUS = "70";
+import LinkComp from "./LinkComp";
+export const CIRCLE_RADIUS = "80";
 const HEIGHT = 100;
 const CHILDREN_SPACING = 100;
 const RADIUS = 500;
@@ -334,7 +335,7 @@ export const createPaths = (node, nodePos, showPartner, paths = []) => {
         )} ${String(firstControlPointY)}, ${String(
           secondControlPointX
         )} ${String(secondControlPointY)}, ${coord[0]} ${coord[1]} `}
-        stroke="black"
+        stroke="white"
         fill="transparent"
       ></path>
     );
@@ -345,23 +346,22 @@ export const createPaths = (node, nodePos, showPartner, paths = []) => {
   return paths;
 };
 
-export const createPathsCircle = (nodes, centerPos) => {
+export const createPathsCircle = (nodes, centerPos, childTapped, currentDescription) => {
   evenlySpaceNodesAroundCircle(centerPos[0], centerPos[1], nodes, RADIUS);
   const paths = [];
 
   nodes.forEach((node) => {
     node.relationships.forEach((relationship) => {
-      const path = (
-        <line
-          x1={relationship.relationNode.circlePos[0]}
-          y1={relationship.relationNode.circlePos[1]}
-          x2={node.circlePos[0]}
-          y2={node.circlePos[1]}
-          stroke="white"
-          stroke-width="2"
-        />
+      const linkComp = (
+        <LinkComp
+          node={node}
+          nodePos={node.circlePos}
+          relationship={relationship}
+          childTapped={childTapped}
+          currentDescription={currentDescription}
+        ></LinkComp>
       );
-      paths.push(path);
+      paths.push(linkComp);
     });
   });
 
@@ -371,9 +371,11 @@ export const createPathsCircle = (nodes, centerPos) => {
         node={node}
         nodePos={node.circlePos}
         isPartner={false}
+        childTapped={childTapped}
+        currentDescription={currentDescription}
       ></NodeComp>
     );
   });
 
   return paths;
-};
+}

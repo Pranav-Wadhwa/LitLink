@@ -1,14 +1,15 @@
 import React from "react";
 import RootNode from "./rootNode"
 const MemoizedRootNode = React.memo(RootNode);
-const Tree = ({rootObj, showPartner}) => {
+const Tree = ({rootObj, childTapped, currentDescription}) => {
   
   return (
     <div>
       <MemoizedRootNode
         rootObj={rootObj}
-        showPartner={showPartner}
-        svgCenter={625}
+        childTapped={childTapped}
+        svgCenter={700}
+        currentDescription={currentDescription}
       ></MemoizedRootNode>
     </div>
   );

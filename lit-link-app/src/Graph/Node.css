@@ -8,8 +8,9 @@
     width: 150px;
     height: 150px;
     background-color: white;
+    cursor: pointer;
 }
 
-.node-text {
-    pointer-events: none;
+.node > text {
+    cursor: pointer;
 }
