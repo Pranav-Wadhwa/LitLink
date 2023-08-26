@@ -12,7 +12,7 @@ const NodeComp = ({ node, nodePos, isPartner }) => {
           width="150"
           height="150"
           stroke="green"
-          fill="yellow"
+          fill="white"
           strokeWidth="2"
         />
       );
@@ -51,7 +51,7 @@ const NodeComp = ({ node, nodePos, isPartner }) => {
         cy={nodePos[1]}
         r={CIRCLE_RADIUS}
         stroke="green"
-        fill="yellow"
+        fill="white"
         strokeWidth="2"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
