@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Tree from "../Graph/tree";
 
 function App() {
+  const play = "Romeo and Juliet Act 1";
   const [characterData, setCharacterData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [description, setDescription] = useState('Click a character or a relationship to learn more.');
@@ -11,7 +12,7 @@ function App() {
     async function fetchData() {
       try {
         const response = await fetch(
-          "http://127.0.0.1:5000/get_characters?act_number=1", {
+          `http://127.0.0.1:5000/get_characters?play=${play}`, {
           method: "GET",
           mode: "cors",
         }
@@ -35,8 +36,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className='App-header'>Romeo and Juliet</h1>
-      <h4 className='App-subtitle'>Play by William Shakespeare | 1597</h4>
+      <h1 className='App-header'>{play}</h1>
+      <h4 className='App-subtitle'>Play by William Shakespeare</h4>
       {isLoading && <p>Fetching data...</p>}
       {characterData && <Tree rootObj={characterData} childTapped={childTapped} currentDescription={description}></Tree>}
       <div className='App-descriptions'>{description}</div>

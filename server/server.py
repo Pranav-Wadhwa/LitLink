@@ -11,7 +11,7 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-cache = dict() # {act_number: object}
+cache = dict() # {play: object}
 
 with open('cache.json', 'r') as cachefile:
     cache = json.loads(cachefile.read())
@@ -20,9 +20,9 @@ model_name = "gpt-4"
 temperature = 0.0
 model = OpenAI(model_name=model_name, temperature=temperature, openai_api_key=constants.OPENAI_API_KEY)
 
-def get_relationships(character1: str, character2: str, act_number: int) -> Relationship|None:
+def get_relationships(character1: str, character2: str, play) -> Relationship|None:
     print(f'Checking relationship between {character1} and {character2}')
-    query = f"Is there a significant relationship between {character1} and {character2} in Act {act_number}? If so, describe it."
+    query = f"Is there a significant relationship between {character1} and {character2} in Act {play}? If so, describe it."
     parser = PydanticOutputParser(pydantic_object=RelationshipDescription)
     template = PromptTemplate(
         template="Answer the user query.\n{format_instructions}\n{query}\n",
@@ -41,11 +41,11 @@ def get_relationships(character1: str, character2: str, act_number: int) -> Rela
 @app.route('/get_characters')
 @cross_origin()
 def get_characters():
-    act_number = request.args.get('act_number')
-    if act_number in cache:
-        return cache[act_number]
+    play = request.args.get('play')
+    if play in cache:
+        return cache[play]
     print('Getting all characters')
-    query = "Who are all of the characters in Romeo and Juliet Act {}? Return their full names".format(act_number)
+    query = "Who are all of the characters in {}? Return their full names".format(play)
     parser = PydanticOutputParser(pydantic_object=CharacterList)
     template = PromptTemplate(
         template="Answer the user query.\n{format_instructions}\n{query}\n",
@@ -63,7 +63,7 @@ def get_characters():
 
     for i, character1 in enumerate(characterList.characters):
         for character2 in characterList.characters[i + 1:]:
-            relationship = get_relationships(character1.name, character2.name, act_number)
+            relationship = get_relationships(character1.name, character2.name, play)
             if relationship:
                 relationships.append(relationship)
 
@@ -71,7 +71,7 @@ def get_characters():
         "characters": list(map(lambda x: x.toJSON(), characterList.characters)), 
         "relationships": list(map(lambda x: x.toJSON(), relationships))
     }
-    cache[act_number] = obj
+    cache[play] = obj
     print(obj)
     with open('cache.json', 'w') as cachefile:
         cachefile.write(json.dumps(obj))

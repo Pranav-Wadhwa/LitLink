@@ -8,7 +8,7 @@ const Tree = ({rootObj, childTapped, currentDescription}) => {
       <MemoizedRootNode
         rootObj={rootObj}
         childTapped={childTapped}
-        svgCenter={700}
+        svgCenter={625}
         currentDescription={currentDescription}
       ></MemoizedRootNode>
     </div>
